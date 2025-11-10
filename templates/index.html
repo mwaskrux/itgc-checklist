@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITGC Checklist</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        th { background: #f0f0f0; }
+        input[type="text"] { width: 100%; }
+        button { padding: 10px 20px; margin-top: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>🧾 IT General Controls Checklist</h2>
+    <form action="/report" method="POST">
+        <table>
+            <tr>
+                <th>Control</th>
+                <th>Status</th>
+                <th>Comment</th>
+            </tr>
+            {% for control in controls %}
+            <tr>
+                <td>{{ control }}</td>
+                <td>
+                    <select name="status_{{ control }}">
+                        <option value="Compliant">Compliant</option>
+                        <option value="Non-Compliant">Non-Compliant</option>
+                        <option value="Not Tested">Not Tested</option>
+                    </select>
+                </td>
+                <td><input type="text" name="comment_{{ control }}" placeholder="Add notes..."></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>
 
